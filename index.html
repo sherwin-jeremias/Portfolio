@@ -1035,6 +1035,7 @@
         </button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             emailjs.init('tRMxD3R4G6bjGun0y'); // Ensure this is your correct EmailJS User ID.
@@ -1052,7 +1053,7 @@
                     message: formData.get('message'),
                 };
 
-                emailjs.send('sj_portfolio', 'template_6oribrw', templateParams) // Ensure these IDs are correct.
+                emailjs.send('sj_portfolio', 'template_6oribrw', templateParams)
                     .then(() => {
                         formMessages.style.display = 'block';
                         formMessages.classList.remove('error');
