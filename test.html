@@ -1,0 +1,1616 @@
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <style>
+        /* Basic Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00ffe7;
+            --secondary-color: #232946;
+            --accent-color: #ff2e63;
+            --text-color: #eaeaea;
+            --light-text-color: #232946;
+            --background-color: #121629;
+            --card-background: #232946;
+            --border-color: #393e46;
+            --font-family: 'Roboto', 'Orbitron', sans-serif;
+            /* Footer specific colors */
+            --footer-bg: #eaeaea;
+            --footer-text: #232946;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        h1 { font-size: 2.8rem; }
+        h2 { font-size: 2.2rem; text-align: center; margin-bottom: 2.5rem; }
+        h3 { font-size: 1.6rem; }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+        }
+
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+        }
+
+        .primary-btn:hover {
+            background-color: #00b3a6;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .secondary-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--card-background);
+            padding: 1rem 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+
+        .navbar .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0 auto;
+        }
+
+        .navbar .nav-links li {
+            margin-left: 30px;
+        }
+
+        .navbar .nav-links a {
+            color: var(--primary-color);
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .navbar .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 20px;
+            padding: 0;
+        }
+
+        .hamburger-menu span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/hero-background.jpg') no-repeat center center/cover;
+            color: var(--light-text-color);
+            text-align: center;
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            color: var(--text-color);
+            background: rgba(0,0,0,0.15);
+            padding: 0.5em 1em;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+        }
+
+        /* Sections General Styling */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        /* About Me Section */
+        .about-me .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            /* Add extra margin-bottom to shift image up and add space below */
+            margin-bottom: 65px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            /* padding-top: 32px; */
+        }
+
+        /* Skills Section */
+        .skills-container {
+            text-align: center;
+        }
+
+        .skills-filter {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .skills-filter button {
+            padding: 10px 20px;
+            border: 2px solid var(--primary-color);
+            background: var(--card-background);
+            color: var(--primary-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+        }
+
+        .skills-filter button.active,
+        .skills-filter button:hover {
+            background: var(--primary-color);
+            color: var(--light-text-color);
+            transform: translateY(-2px);
+        }
+
+        .skills-grid {
+            display: grid;
+            /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+            gap: 20px;
+            text-align: center;
+            position: relative;
+            justify-content: center;
+        }
+
+        .skill-item {
+            background-color: var(--card-background);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, grid-column 0.3s ease, width 0.3s ease, height 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            height: 220px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .skill-item.expanded {
+            grid-column: span 2;
+            height: auto;
+            min-height: 400px;
+            z-index: 10;
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+
+        .skill-item i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .skill-item h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .skill-block-bar {
+            display: flex;
+            gap: 2px;
+            margin: 12px 0;
+            justify-content: center;
+            align-items: center;
+            min-height: 18px;
+        }
+
+        .skill-block-bar .block {
+            width: 10px;
+            height: 16px;
+            background: var(--border-color);
+            border-radius: 2px;
+            transition: background 0.3s;
+        }
+
+        .skill-block-bar .block.filled {
+            background: var(--primary-color);
+        }
+
+        .skill-percent {
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 1.1em;
+        }
+
+        .skill-details {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            background: var(--card-background);
+            padding: 0 20px;
+            color: var(--text-color);
+            transition: opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .skill-item.expanded .skill-details {
+            opacity: 1;
+            max-height: 500px;
+            padding: 20px;
+        }
+
+        .skill-details p {
+            font-size: 1rem;
+            line-height: 1.7;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .skill-details .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 1rem;
+            line-height: 24px;
+            text-align: center;
+            transition: background 0.2s ease;
+        }
+
+        .skill-details .close-btn:hover {
+            background: #d81b60;
+        }
+
+        /* Projects Section */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-card h3 {
+            margin: 15px 15px 10px;
+            color: var(--primary-color);
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            padding: 0 15px 15px;
+            color: var(--text-color);
+        }
+
+        .project-links {
+            padding: 0 15px 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .project-btn {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            border: none;
+        }
+
+        .project-btn:hover {
+            background-color: #00b3a6;
+            color: #fff;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+        }
+
+        .contact p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--text-color);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: var(--font-family);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .form-messages {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .form-messages.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .form-messages.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .social-links {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            transition: color 0.5s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            color: var(--footer-text);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: var(--card-background);
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                padding: 15px 0;
+                z-index: 999;
+            }
+
+            .navbar .nav-links.active {
+                display: flex;
+            }
+
+            .navbar .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .hamburger-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-pic {
+                margin-bottom: 20px;
+            }
+
+            .about-text {
+                padding-top: 0;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skill-item {
+                overflow: visible;            
+            }
+
+            .skill-item.expanded {
+                grid-column: span 1;
+                min-height: 450px;
+                transform: scale(1.02);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.4rem; }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .skill-details p {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Light Theme */
+        .light-theme {
+            --primary-color: #0056b3;
+            --secondary-color: #f5f6fa;
+            --accent-color: #ff2e63;
+            --text-color: #232946;
+            --light-text-color: #fff;
+            --background-color: #f5f6fa;
+            --card-background: #fff;
+            --border-color: #d1d9e6;
+            /* Footer specific colors for light theme */
+            --footer-bg: #232946;
+            --footer-text: #eaeaea;
+        }
+
+        body.light-theme {
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .light-theme .navbar,
+        .light-theme .project-card,
+        .light-theme .about-me .container,
+        .light-theme .contact-form,
+        .light-theme .skill-item,
+        .light-theme .skill-details {
+            background: var(--card-background);
+            color: var(--text-color);
+        }
+
+        .light-theme .btn.primary-btn {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+        }
+
+        .light-theme .btn.secondary-btn {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .light-theme .btn.primary-btn:hover,
+        .light-theme .btn.project-btn:hover {
+            background-color: #003366;
+            color: #fff;
+        }
+
+        .light-theme .btn.secondary-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        .light-theme .hero h1 {
+            color: var(--primary-color);
+        }
+
+        .light-theme .hero p {
+            color: var(--text-color);
+            background: rgba(0,0,0,0.04);
+        }
+
+        /* Floating Controls */
+        .floating-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 1001;
+        }
+
+        .floating-btn {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .floating-btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.1); 
+        }
+
+        /* Header Controls */
+        .header-controls .btn {
+            padding: 6px 12px;
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <canvas id="skillsCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none;"></canvas>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">Joseph</a>
+            <button class="hamburger-menu" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="header-controls" style="display:flex; justify-content:flex-end; gap:16px; margin: 10px 20px 0 0;">
+                <button id="theme-toggle" class="btn secondary-btn" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button id="lang-toggle" class="btn secondary-btn" aria-label="Toggle language">
+                    EN/FR
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h1>Hello, I'm <span class="highlight">Joseph</span></h1>
+                <p>A BUT 2 Info student at IUT Villetaneuse, passionate about web development and software engineering.</p>
+                <a href="#projects" class="btn primary-btn">View My Work</a>
+                <a href="#contact" class="btn secondary-btn">Get in Touch</a>
+            </div>
+        </section>
+
+        <section id="about" class="about-me">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <img src="img/profile.jpg" alt="Your Profile Picture" class="profile-pic">
+                    <div class="about-text">
+                        <p>Welcome to my portfolio! I'm a second-year Information Technology student at IUT Villetaneuse, constantly learning and applying my knowledge to create impactful solutions.</p>
+                        <p>During my studies, I've gained experience in web development, database management, programming languages like Java, Python, C, and frameworks like Spring Boot. I enjoy solving complex problems and building user-friendly interfaces.</p>
+                        <p>I'm always looking for new challenges and opportunities to grow. Feel free to explore my projects below!</p>
+                        <a href="democv.pdf" target="_blank" class="btn primary-btn">Download Resume</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills">
+            <div class="container">
+                <h2>My Skills</h2>
+                <div class="skills-filter">
+                    <button data-filter="all" class="active">All</button>
+                    <button data-filter="programming">Programming Languages</button>
+                    <button data-filter="database">Databases</button>
+                    <button data-filter="framework">Frameworks</button>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-item" data-category="programming">
+                        <i class="fab fa-html5 fa-3x" style="color:#ff5722"></i>
+                        <h3>HTML5</h3>
+                        <div class="skill-block-bar" data-percent="95"></div>
+                        <div class="skill-details">
+                            <button class="close-btn">✕</button>
+                            <span class="skill-percent">95%</span>
+                            <p><strong>Overview:</strong> HTML5 is the standard markup language for structuring content on the web, enabling semantic and accessible web pages.</p>
+                            <p><strong>How I Learned:</strong> Mastered through coursework at IUT Villetaneuse and self-paced projects, focusing on semantic elements and accessibility.</p>
+                            <p><strong>When:</strong> Started in 2023 during my first year, with continued application in portfolio and freelance projects.</p>
+                            <p><strong>Applications:</strong> Built responsive web interfaces, including this portfolio, using HTML5's structural elements.</p>
+                        </div>
+                    </div>
+                    <div class="skill-item" data-category="programming">
+                        <i class="fab fa-css3-alt fa-3x" style="color:#2196f3"></i>
+                        <h3>CSS3</h3>
+                        <div class="skill-block-bar" data-percent="90"></div>
+                        <div class="skill-details">
+                            <button class="close-btn">✕</button>
+                            <span class="skill-percent">90%</span>
+                            <p><strong>Overview:</strong> CSS3 is used for styling web pages, enabling responsive designs and animations.</p>
+                            <p><strong>How I Learned:</strong> Learned through IUT coursework and personal projects, focusing on Flexbox, Grid, and animations.</p>
+                            <p><strong>When:</strong> Began in 2023, with advanced techniques explored in 2024.</p>
+                            <p><strong>Applications:</strong> Designed this portfolio's responsive layout and animations using CSS3.</p>
+                        </div>
+                    </div>
+                    <div class="skill-item" data-category="programming">
+                        <i class="fab fa-js fa-3x" style="color:#ffd600"></i>
+                        <h3>JavaScript</h3>
+                        <div class="skill-block-bar" data-percent="80"></div>
+                        <div class="skill-details">
+                            <button class="close-btn">✕</button>
+                            <span class="skill-percent">80%</span>
+                            <p><strong>Overview:</strong> JavaScript is a dynamic programming language for creating interactive web applications.</p>
+                            <p><strong>How I Learned:</strong> Studied at IUT Villetaneuse, with hands-on experience in DOM manipulation and asynchronous programming.</p>
+                            <p><strong>When:</strong> Learned in 2023-2024, applied in interactive web projects.</p>
+                            <p><strong>Applications:</strong> Implemented dynamic features like form validation and skill filtering in this portfolio.</p>
+                        </div>
+                    </div>
+                    <div class="skill-item" data-category="programming">
+                        <i class="fab fa-php fa-3x" style="color:#7377ad"></i>
+                        <h3>PHP</h3>
+                        <div class="skill-block-bar" data-percent="70"></div>
+                        <div class="skill-details">
+                            <button class="close-btn">✕</button>
+                            <span class="skill-percent">70%</span>
+                            <p><strong>Overview:</strong> PHP is a server-side scripting language for web development, often used with databases.</p>
+                            <p><strong>How I Learned:</strong> Learned through IUT backend development courses, focusing on server-side logic.</p>
+                            <p><strong>When:</strong> Studied in 2024, applied in academic projects.</p>
+                            <p><strong>Applications:</strong> Built dynamic web applications with database integration.</p>
+                        </div>
+                    </div>
+                    <div class="skill-item" data-category="programming">
+                        <i class="fab fa-java fa-3x" style="color:#f44336"></i>
+                        <h3>Java</h3>
+                        <div class="skill-block-bar" data-percent="60"></div>
+                        <div class="skill-details">
+                            <button class="close-btn">✕</button>
+                            <span class="skill-percent">60%</span>
+                            <p><strong>Overview:</strong> Java is a versatile, object-oriented programming language used for enterprise applications.</p>
+                            <p><strong>How I Learned:</strong> Studied at IUT, focusing on OOP principles and Java SE.</p>
+                            <p><strong>When:</strong> Learned in 2023-2024, used in academic projects.</p>
+                            <p><strong>Applications:</strong> Developed console applications and backend services.</p>
+                        </div>
+                    </div>
+                    <div class="skill-item" data-category="programming">
+                        <i class="devicon-c-plain fa-3x" style="color:#00599C"></i>
+                        <h3>C</h3>
+                        <div class="skill-block-bar" data-percent="50"></div>
+                        <div class="skill-details">
+                            <button class="close-btn">✕</button>
+                            <span class="skill-percent">50%</span>
+                            <p><strong>Overview:</strong> C is a low-level programming language for system programming and performance-critical applications.</p>
+                            <p><strong>How I Learned:</strong> Learned through IUT coursework, focusing on memory management and pointers.</p>
+                            <p><strong>When:</strong> Studied in 2024.</p>
+                            <p><strong>Applications:</strong> Wrote low-level programs for system simulations.</p>
+                        </div>
+                    </div>
+                    <div class="skill-item" data-category="programming">
+                        <i class="devicon-cplusplus-plain fa-3x" style="color:#00599C"></i>
+                        <h3>C++</h3>
+                        <div class="skill-block-bar" data-percent="50"></div>
+                        <div class="skill-details">
+                            <button class="close-btn">✕</button>
+                            <span class="skill-percent">50%</span>
+                            <p><strong>Overview:</strong> C++ is an extension of C with object-oriented features, used for high-performance applications.</p>
+                            <p><strong>How I Learned:</strong> Learned at IUT, focusing on OOP and STL.</p>
+                            <p><strong>When:</strong> Studied in 2024.</p>
+                            <p><strong>Applications:</strong> Developed performance-critical applications.</p>
+                        </div>
+                    </div>
+                    <div class="skill-item" data-category="database">
+                        <i class="devicon-mysql-plain fa-3x" style="color:#00758F"></i>
+                        <h3>MySQL</h3>
+                        <div class="skill-block-bar" data-percent="75"></div>
+                        <div class="skill-details">
+                            <button class="close-btn">✕</button>
+                            <span class="skill-percent">75%</span>
+                            <p><strong>Overview:</strong> MySQL is a relational database management system for storing and querying data.</p>
+                            <p><strong>How I Learned:</strong> Learned through IUT database courses, focusing on SQL queries and schema design.</p>
+                            <p><strong>When:</strong> Studied in 2023-2024.</p>
+                            <p><strong>Applications:</strong> Designed and queried databases for web applications.</p>
+                        </div>
+                    </div>
+                    <div class="skill-item" data-category="database">
+                        <i class="devicon-postgresql-plain fa-3x" style="color:#336791"></i>
+                        <h3>PostgreSQL</h3>
+                        <div class="skill-block-bar" data-percent="75"></div>
+                        <div class="skill-details">
+                            <button class="close-btn">✕</button>
+                            <span class="skill-percent">75%</span>
+                            <p><strong>Overview:</strong> PostgreSQL is an advanced open-source RDBMS known for extensibility.</p>
+                            <p><strong>How I Learned:</strong> Learned at IUT, focusing on advanced SQL and triggers.</p>
+                            <p><strong>When:</strong> Studied in 2024.</p>
+                            <p><strong>Applications:</strong> Used in backend development for robust data management.</p>
+                        </div>
+                    </div>
+                    <div class="skill-item" data-category="framework">
+                        <i class="devicon-spring-plain fa-3x" style="color:#6DB33F"></i>
+                        <h3>Spring Boot</h3>
+                        <div class="skill-block-bar" data-percent="70"></div>
+                        <div class="skill-details">
+                            <button class="close-btn">✕</button>
+                            <span class="skill-percent">70%</span>
+                            <p><strong>Overview:</strong> Spring Boot is a Java framework for building microservices and web applications.</p>
+                            <p><strong>How I Learned:</strong> Learned through IUT projects, focusing on REST APIs and dependency injection.</p>
+                            <p><strong>When:</strong> Studied in 2024.</p>
+                            <p><strong>Applications:</strong> Built RESTful APIs for web applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2>My Projects</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <img src="img/project1.png" alt="Project 1 Thumbnail">
+                        <h3>Project Title One</h3>
+                        <p>A brief description of Project One, highlighting technologies used (e.g., React, Node.js, MySQL).</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank" class="btn project-btn">Live Demo</a>
+                            <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="img/project2.png" alt="Project 2 Thumbnail">
+                        <h3>Project Title Two</h3>
+                        <p>A brief description of Project Two, highlighting technologies used (e.g., Vue.js, PHP, PostgreSQL).</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank" class="btn project-btn">Live Demo</a>
+                            <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="img/project2.png" alt="Project 2 Thumbnail">
+                        <h3>Project Title Two</h3>
+                        <p>A brief description of Project Two, highlighting technologies used (e.g., Vue.js, PHP, PostgreSQL).</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank" class="btn project-btn">Live Demo</a>
+                            <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>Have a question or just want to connect? Feel free to reach out!</p>
+                <form action="php/contact.php" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name" id="label-name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" id="label-email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" id="label-message">Message:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Send Message</button>
+                    <div id="form-messages" class="form-messages"></div>
+                </form>
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="https://github.com/yourprofile" target="_blank" aria-label="GitHub"><i class="fab fa-github fa-2x"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 Joseph. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="floating-controls">
+        
+        <button id="floating-theme-toggle" style="display:none;background:var(--primary-color);color:#fff;border:none;border-radius:50%;width:48px;height:48px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:1.5rem;cursor:pointer;">
+            <i class="fas fa-sun"></i>
+        </button>
+        <button id="floating-lang-toggle" style="display:none;background:var(--primary-color);color:#fff;border:none;border-radius:50%;width:48px;height:48px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:1.5rem;cursor:pointer;">
+            <span id="lang-flag" role="img" aria-label="Français">🇫🇷</span>
+        </button>
+        <button id="scroll-to-top" style="display:none;background:var(--primary-color);color:#fff;border:none;border-radius:50%;width:48px;height:48px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:1.5rem;cursor:pointer;">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Canvas Animation
+            const canvas = document.getElementById('skillsCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let particles = [];
+            const particleCount = 40;
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 5 + 1;
+                    this.speedX = Math.random() * 2 - 1;
+                    this.speedY = Math.random() * 2 - 1; 
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    if (this.size > 0.2) this.size -= 0.1;
+
+                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                }
+
+                draw() {
+                    // Set particle color based on theme
+                    let isLight = document.body.classList.contains('light-theme');
+                    ctx.fillStyle = isLight ? 'rgb(76, 185, 242)' : 'rgba(0, 255, 231, 0.5)';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = 'rgba(0, 255, 231, 0.2)';
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                    if (particles[i].size <= 0.2) {
+                        particles.splice(i, 1);
+                        i--;
+                        particles.push(new Particle());
+                    }
+                }
+                requestAnimationFrame(animateParticles);
+            }
+
+            initParticles();
+            animateParticles();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initParticles();
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerOffset = document.querySelector('header').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - headerOffset - 20;
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                        if (document.querySelector('.nav-links').classList.contains('active')) {
+                            document.querySelector('.nav-links').classList.remove('active');
+                            document.querySelector('.hamburger-menu').classList.remove('open');
+                        }
+                    }
+                });
+            });
+
+            const scrollButton = document.getElementById('scroll-to-top');
+            const floatingThemeToggle = document.getElementById('floating-theme-toggle');
+            const floatingLangToggle = document.getElementById('floating-lang-toggle');
+
+            // Ensure floating buttons are hidden on page load
+            scrollButton.style.display = 'none';
+            floatingThemeToggle.style.display = 'none';
+            floatingLangToggle.style.display = 'none';
+
+            // Scroll logic to show/hide floating buttons
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollButton.style.display = 'block';
+                    floatingThemeToggle.style.display = 'block';
+                    floatingLangToggle.style.display = 'block';
+                } else {
+                    scrollButton.style.display = 'none';
+                    floatingThemeToggle.style.display = 'none';
+                    floatingLangToggle.style.display = 'none';
+                }
+            });
+
+            // Scroll-to-top button functionality
+            scrollButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Theme toggle functionality
+            floatingThemeToggle.addEventListener('click', () => themeToggle.click());
+
+            // Language toggle functionality
+            floatingLangToggle.addEventListener('click', () => langToggle.click());
+
+            // Mobile Navigation Toggle
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navLinks = document.querySelector('.nav-links');
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('open');
+                });
+            }
+
+            // Contact Form Submission
+            const contactForm = document.querySelector('.contact-form');
+            const formMessages = document.getElementById('form-messages');
+            if (contactForm && formMessages) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const name = contactForm.querySelector('[name="name"]').value.trim();
+                    const email = contactForm.querySelector('[name="email"]').value.trim();
+                    const message = contactForm.querySelector('[name="message"]').value.trim();
+                    if (!name || !email || !message) {
+                        formMessages.style.display = 'block';
+                        formMessages.classList.remove('success');
+                        formMessages.classList.add('error');
+                        formMessages.textContent = translations[currentLang].formRequired;
+                        setTimeout(() => { formMessages.style.display = 'none'; }, 5000);
+                        return;
+                    }
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                        formMessages.style.display = 'block';
+                        formMessages.classList.remove('success');
+                        formMessages.classList.add('error');
+                        formMessages.textContent = translations[currentLang].formInvalidEmail;
+                        setTimeout(() => { formMessages.style.display = 'none'; }, 5000);
+                        return;
+                    }
+                    const formData = new FormData(contactForm);
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const result = await response.json();
+                    formMessages.style.display = 'block';
+                    if (result.success) {
+                        formMessages.classList.remove('error');
+                        formMessages.classList.add('success');
+                        formMessages.textContent = translations[currentLang].formSuccess;
+                        contactForm.reset();
+                    } else {
+                        formMessages.classList.remove('success');
+                        formMessages.classList.add('error');
+                        formMessages.textContent = translations[currentLang].formError;
+                    }
+                    setTimeout(() => { formMessages.style.display = 'none'; }, 5000);
+                });
+            }
+
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                body.classList.add('light-theme');
+                const icon = themeToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            } else {
+                body.classList.remove('light-theme');
+                const icon = themeToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            }
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-theme');
+                const icon = themeToggle.querySelector('i');
+                if (body.classList.contains('light-theme')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+
+            // Internationalization
+            const langToggle = document.getElementById('lang-toggle');
+            const translations = {
+                en: {
+                    heroTitle: "Hello, I'm <span class=\"highlight\">Joseph</span>",
+                    heroDesc: "A BUT 2 Info student at IUT Villetaneuse, passionate about web development and software engineering.",
+                    viewWork: "View My Work",
+                    getInTouch: "Get in Touch",
+                    about: "About Me",
+                    about1: "Welcome to my portfolio! I'm a second-year Information Technology student at IUT Villetaneuse, constantly learning and applying my knowledge to create impactful solutions.",
+                    about2: "During my studies, I've gained experience in web development, database management, and programming languages like Java, Python, and C. I enjoy solving complex problems and building user-friendly interfaces.",
+                    about3: "I'm always looking for new challenges and opportunities to grow. Feel free to explore my projects below!",
+                    downloadCV: "Download Resume",
+                    skills: "My Skills",
+                    filterAll: "All",
+                    filterProgramming: "Programming Languages",
+                    filterDatabase: "Databases",
+                    filterFramework: "Frameworks",
+                    skillHTML5: "HTML5",
+                    skillHTML5Overview: "HTML5 is the standard markup language for structuring content on the web, enabling semantic and accessible web pages.",
+                    skillHTML5How: "Mastered through coursework at IUT Villetaneuse and self-paced projects, focusing on semantic elements and accessibility.",
+                    skillHTML5When: "Started in 2023 during my first year, with continued application in portfolio and freelance projects.",
+                    skillHTML5Apps: "Built responsive web interfaces, including this portfolio, using HTML5's structural elements.",
+                    skillCSS3: "CSS3",
+                    skillCSS3Overview: "CSS3 is used for styling web pages, enabling responsive designs and animations.",
+                    skillCSS3How: "Learned through IUT coursework and personal projects, focusing on Flexbox, Grid, and animations.",
+                    skillCSS3When: "Began in 2023, with advanced techniques explored in 2024.",
+                    skillCSS3Apps: "Designed this portfolio's responsive layout and animations using CSS3.",
+                    skillJavaScript: "JavaScript",
+                    skillJavaScriptOverview: "JavaScript is a dynamic programming language for creating interactive web applications.",
+                    skillJavaScriptHow: "Studied at IUT Villetaneuse, with hands-on experience in DOM manipulation and asynchronous programming.",
+                    skillJavaScriptWhen: "Learned in 2023-2024, applied in interactive web projects.",
+                    skillJavaScriptApps: "Implemented dynamic features like form validation and skill filtering in this portfolio.",
+                    skillPHP: "PHP",
+                    skillPHPOverview: "PHP is a server-side scripting language for web development, often used with databases.",
+                    skillPHPHow: "Learned through IUT backend development courses, focusing on server-side logic.",
+                    skillPHPWhen: "Studied in 2024, applied in academic projects.",
+                    skillPHPApps: "Built dynamic web applications with database integration.",
+                    skillJava: "Java",
+                    skillJavaOverview: "Java is a versatile, object-oriented programming language used for enterprise applications.",
+                    skillJavaHow: "Studied at IUT, focusing on OOP principles and Java SE.",
+                    skillJavaWhen: "Learned in 2023-2024, used in academic projects.",
+                    skillJavaApps: "Developed console applications and backend services.",
+                    skillC: "C",
+                    skillCOverview: "C is a low-level programming language for system programming and performance-critical applications.",
+                    skillCHow: "Learned through IUT coursework, focusing on memory management and pointers.",
+                    skillCWhen: "Studied in 2024.",
+                    skillCApps: "Wrote low-level programs for system simulations.",
+                    skillCpp: "C++",
+                    skillCppOverview: "C++ is an extension of C with object-oriented features, used for high-performance applications.",
+                    skillCppHow: "Learned at IUT, focusing on OOP and STL.",
+                    skillCppWhen: "Studied in 2024.",
+                    skillCppApps: "Developed performance-critical applications.",
+                    skillMySQL: "MySQL",
+                    skillMySQLOverview: "MySQL is a relational database management system for storing and querying data.",
+                    skillMySQLHow: "Learned through IUT database courses, focusing on SQL queries and schema design.",
+                    skillMySQLWhen: "Studied in 2023-2024.",
+                    skillMySQLApps: "Designed and queried databases for web applications.",
+                    skillPostgreSQL: "PostgreSQL",
+                    skillPostgreSQLOverview: "PostgreSQL is an advanced open-source RDBMS known for extensibility.",
+                    skillPostgreSQLHow: "Learned at IUT, focusing on advanced SQL and triggers.",
+                    skillPostgreSQLWhen: "Studied in 2024.",
+                    skillPostgreSQLApps: "Used in backend development for robust data management.",
+                    skillSpringBoot: "Spring Boot",
+                    skillSpringBootOverview: "Spring Boot is a Java framework for building microservices and web applications.",
+                    skillSpringBootHow: "Learned through IUT projects, focusing on REST APIs and dependency injection.",
+                    skillSpringBootWhen: "Studied in 2024.",
+                    skillSpringBootApps: "Built RESTful APIs for web applications.",
+                    projects: "My Projects",
+                    project1: "Project Title One",
+                    project1desc: "A brief description of Project One, highlighting technologies used (e.g., React, Node.js, MySQL).",
+                    project2: "Project Title Two",
+                    project2desc: "A brief description of Project Two, highlighting technologies used (e.g., Vue.js, PHP, PostgreSQL).",
+                    contact: "Get in Touch",
+                    contactDesc: "Have a question or just want to connect? Feel free to reach out!",
+                    sendMsg: "Send Message",
+                    formRequired: "Please fill in all fields.",
+                    formInvalidEmail: "Please enter a valid email address.",
+                    formSuccess: "Thank you! Your message has been sent.",
+                    formError: "An unexpected error occurred.",
+                    labelName: "Name:",
+                    labelEmail: "Email:",
+                    labelMessage: "Message:"
+                },
+                fr: {
+                    heroTitle: "Bonjour, je suis <span class=\"highlight\">Joseph</span>",
+                    heroDesc: "Étudiant en BUT 2 Info à l'IUT de Villetaneuse, passionné par le développement web et l'ingénierie logicielle.",
+                    viewWork: "Voir mes projets",
+                    getInTouch: "Contactez-moi",
+                    about: "À propos de moi",
+                    about1: "Bienvenue sur mon portfolio ! Je suis étudiant en deuxième année d'informatique à l'IUT de Villetaneuse, toujours en train d'apprendre et d'appliquer mes connaissances pour créer des solutions impactantes.",
+                    about2: "Au cours de mes études, j'ai acquis de l'expérience en développement web, gestion de bases de données et langages de programmation comme Java, Python et C. J'aime résoudre des problèmes complexes et créer des interfaces conviviales.",
+                    about3: "Je suis toujours à la recherche de nouveaux défis et d'opportunités pour progresser. N'hésitez pas à découvrir mes projets ci-dessous !",
+                    downloadCV: "Télécharger le CV",
+                    skills: "Mes Compétences",
+                    filterAll: "Tous",
+                    filterProgramming: "Langages de Programmation",
+                    filterDatabase: "Bases de Données",
+                    filterFramework: "Frameworks",
+                    skillHTML5: "HTML5",
+                    skillHTML5Overview: "HTML5 est le langage de balisage standard pour structurer le contenu sur le web, permettant des pages web sémantiques et accessibles.",
+                    skillHTML5How: "Maîtrisé grâce aux cours à l'IUT de Villetaneuse et à des projets personnels, en se concentrant sur les éléments sémantiques et l'accessibilité.",
+                    skillHTML5When: "Commencé en 2023 pendant ma première année, avec une application continue dans des projets de portfolio et freelance.",
+                    skillHTML5Apps: "Conçu des interfaces web responsives, y compris ce portfolio, en utilisant les éléments structurels de HTML5.",
+                    skillCSS3: "CSS3",
+                    skillCSS3Overview: "CSS3 est utilisé pour styliser les pages web, permettant des conceptions responsives et des animations.",
+                    skillCSS3How: "Appris grâce aux cours de l'IUT et à des projets personnels, en se concentrant sur Flexbox, Grid et les animations.",
+                    skillCSS3When: "Commencé en 2023, avec des techniques avancées explorées en 2024.",
+                    skillCSS3Apps: "Conçu la mise en page responsive et les animations de ce portfolio avec CSS3.",
+                    skillJavaScript: "JavaScript",
+                    skillJavaScriptOverview: "JavaScript est un langage de programmation dynamique pour créer des applications web interactives.",
+                    skillJavaScriptHow: "Étudié à l'IUT de Villetaneuse, avec une expérience pratique en manipulation du DOM et programmation asynchrone.",
+                    skillJavaScriptWhen: "Appris en 2023-2024, appliqué dans des projets web interactifs.",
+                    skillJavaScriptApps: "Implémenté des fonctionnalités dynamiques comme la validation de formulaires et le filtrage des compétences dans ce portfolio.",
+                    skillPHP: "PHP",
+                    skillPHPOverview: "PHP est un langage de script côté serveur pour le développement web, souvent utilisé avec des bases de données.",
+                    skillPHPHow: "Appris grâce aux cours de développement backend à l'IUT, en se concentrant sur la logique côté serveur.",
+                    skillPHPWhen: "Étudié en 2024, appliqué dans des projets académiques.",
+                    skillPHPApps: "Développé des applications web dynamiques avec intégration de bases de données.",
+                    skillJava: "Java",
+                    skillJavaOverview: "Java est un langage de programmation orienté objet polyvalent utilisé pour les applications d'entreprise.",
+                    skillJavaHow: "Étudié à l'IUT, en se concentrant sur les principes OOP et Java SE.",
+                    skillJavaWhen: "Appris en 2023-2024, utilisé dans des projets académiques.",
+                    skillJavaApps: "Développé des applications console et des services backend.",
+                    skillC: "C",
+                    skillCOverview: "C est un langage de programmation de bas niveau pour la programmation système et les applications critiques en performance.",
+                    skillCHow: "Appris grâce aux cours de l'IUT, en se concentrant sur la gestion de la mémoire et les pointeurs.",
+                    skillCWhen: "Étudié en 2024.",
+                    skillCApps: "Écrit des programmes de bas niveau pour des simulations système.",
+                    skillCpp: "C++",
+                    skillCppOverview: "C++ est une extension de C avec des fonctionnalités orientées objet, utilisée pour les applications à haute performance.",
+                    skillCppHow: "Appris à l'IUT, en se concentrant sur l'OOP et la STL.",
+                    skillCppWhen: "Étudié en 2024.",
+                    skillCppApps: "Développé des applications critiques en performance.",
+                    skillMySQL: "MySQL",
+                    skillMySQLOverview: "MySQL est un système de gestion de bases de données relationnelles pour stocker et interroger des données.",
+                    skillMySQLHow: "Appris grâce aux cours sur les bases de données à l'IUT, en se concentrant sur les requêtes SQL et la conception de schémas.",
+                    skillMySQLWhen: "Étudié en 2023-2024.",
+                    skillMySQLApps: "Conçu et interrogé des bases de données pour des applications web.",
+                    skillPostgreSQL: "PostgreSQL",
+                    skillPostgreSQLOverview: "PostgreSQL est un SGBDR open-source avancé connu pour son extensibilité.",
+                    skillPostgreSQLHow: "Appris à l'IUT, en se concentrant sur SQL avancé et les déclencheurs.",
+                    skillPostgreSQLWhen: "Étudié en 2024.",
+                    skillPostgreSQLApps: "Utilisé dans le développement backend pour une gestion robuste des données.",
+                    skillSpringBoot: "Spring Boot",
+                    skillSpringBootOverview: "Spring Boot est un framework Java pour construire des microservices et des applications web.",
+                    skillSpringBootHow: "Appris grâce aux projets de l'IUT, en se concentrant sur les API REST et l'injection de dépendances.",
+                    skillSpringBootWhen: "Étudié en 2024.",
+                    skillSpringBootApps: "Construits des API RESTful pour des applications web.",
+                    projects: "Mes Projets",
+                    project1: "Titre du Projet Un",
+                    project1desc: "Une brève description du Projet Un, mettant en avant les technologies utilisées (ex : React, Node.js, MySQL).",
+                    project2: "Titre du Projet Deux",
+                    project2desc: "Une brève description du Projet Deux, mettant en avant les technologies utilisées (ex : Vue.js, PHP, PostgreSQL).",
+                    contact: "Contact",
+                    contactDesc: "Une question ou envie de discuter ? N'hésitez pas à me contacter !",
+                    sendMsg: "Envoyer le message",
+                    formRequired: "Veuillez remplir tous les champs.",
+                    formInvalidEmail: "Veuillez saisir une adresse e-mail valide.",
+                    formSuccess: "Merci ! Votre message a été envoyé.",
+                    formError: "Une erreur inattendue s'est produite.",
+                    labelName: "Nom :",
+                    labelEmail: "E-mail :",
+                    labelMessage: "Message :"
+                }
+            };
+
+            // Add skill percent values to translations for each skill
+            const skillPercents = [95, 90, 80, 70, 60, 50, 50, 75, 75, 70];
+
+            let currentLang = localStorage.getItem('lang') || 'fr';
+            function setLang(lang) {
+                currentLang = lang;
+                localStorage.setItem('lang', lang);
+                document.querySelector('.hero h1').innerHTML = translations[lang].heroTitle;
+                document.querySelector('.hero p').textContent = translations[lang].heroDesc;
+                document.querySelector('.hero .primary-btn').textContent = translations[lang].viewWork;
+                document.querySelector('.hero .secondary-btn').textContent = translations[lang].getInTouch;
+                document.querySelector('#about h2').textContent = translations[lang].about;
+                const aboutPs = document.querySelectorAll('.about-text p');
+                aboutPs[0].textContent = translations[lang].about1;
+                aboutPs[1].textContent = translations[lang].about2;
+                aboutPs[2].textContent = translations[lang].about3;
+                document.querySelector('.about-text .primary-btn').textContent = translations[lang].downloadCV;
+                document.querySelector('#skills h2').textContent = translations[lang].skills;
+                document.querySelectorAll('.skills-filter button')[0].textContent = translations[lang].filterAll;
+                document.querySelectorAll('.skills-filter button')[1].textContent = translations[lang].filterProgramming;
+                document.querySelectorAll('.skills-filter button')[2].textContent = translations[lang].filterDatabase;
+                document.querySelectorAll('.skills-filter button')[3].textContent = translations[lang].filterFramework;
+                // Update skill names and percents
+                const skillNames = [
+                    translations[lang].skillHTML5,
+                    translations[lang].skillCSS3,
+                    translations[lang].skillJavaScript,
+                    translations[lang].skillPHP,
+                    translations[lang].skillJava,
+                    translations[lang].skillC,
+                    translations[lang].skillCpp,
+                    translations[lang].skillMySQL,
+                    translations[lang].skillPostgreSQL,
+                    translations[lang].skillSpringBoot
+                ];
+                document.querySelectorAll('.skill-item h3').forEach((el, i) => {
+                    el.textContent = skillNames[i];
+                });
+                document.querySelectorAll('.skill-details .skill-percent').forEach((el, i) => {
+                    el.textContent = skillPercents[i] + '%';
+                });
+                // Update skill details text
+                const skillDetailsPs = document.querySelectorAll('.skill-item .skill-details p');
+                // Each skill has 4 <p>
+                const skillDetailKeys = [
+                    ['skillHTML5Overview','skillHTML5How','skillHTML5When','skillHTML5Apps'],
+                    ['skillCSS3Overview','skillCSS3How','skillCSS3When','skillCSS3Apps'],
+                    ['skillJavaScriptOverview','skillJavaScriptHow','skillJavaScriptWhen','skillJavaScriptApps'],
+                    ['skillPHPOverview','skillPHPHow','skillPHPWhen','skillPHPApps'],
+                    ['skillJavaOverview','skillJavaHow','skillJavaWhen','skillJavaApps'],
+                    ['skillCOverview','skillCHow','skillCWhen','skillCApps'],
+                    ['skillCppOverview','skillCppHow','skillCppWhen','skillCppApps'],
+                    ['skillMySQLOverview','skillMySQLHow','skillMySQLWhen','skillMySQLApps'],
+                    ['skillPostgreSQLOverview','skillPostgreSQLHow','skillPostgreSQLWhen','skillPostgreSQLApps'],
+                    ['skillSpringBootOverview','skillSpringBootHow','skillSpringBootWhen','skillSpringBootApps']
+                ];
+                for (let i = 0; i < 10; i++) {
+                    for (let j = 0; j < 4; j++) {
+                        skillDetailsPs[i*4+j].textContent = translations[lang][skillDetailKeys[i][j]];
+                    }
+                }
+                document.querySelector('#projects h2').textContent = translations[lang].projects;
+                document.querySelectorAll('.project-card h3')[0].textContent = translations[lang].project1;
+                document.querySelectorAll('.project-card p')[0].textContent = translations[lang].project1desc;
+                document.querySelectorAll('.project-card h3')[1].textContent = translations[lang].project2;
+                document.querySelectorAll('.project-card p')[1].textContent = translations[lang].project2desc;
+                document.querySelectorAll('.project-card h3')[2].textContent = translations[lang].project2;
+                document.querySelectorAll('.project-card p')[2].textContent = translations[lang].project2desc;
+                document.querySelector('#contact h2').textContent = translations[lang].contact;
+                document.querySelector('#contact p').textContent = translations[lang].contactDesc;
+                document.querySelector('.contact-form button').textContent = translations[lang].sendMsg;
+                document.getElementById('label-name').textContent = translations[lang].labelName;
+                document.getElementById('label-email').textContent = translations[lang].labelEmail;
+                document.getElementById('label-message').textContent = translations[lang].labelMessage;
+            }
+            function updateLangFlag() {
+                const flag = document.getElementById('lang-flag');
+                if (currentLang === 'en') {
+                    flag.textContent = '🇬🇧';
+                    flag.setAttribute('aria-label', 'English');
+                } else {
+                    flag.textContent = '🇫🇷';
+                    flag.setAttribute('aria-label', 'Français');
+                }
+            }
+            langToggle.addEventListener('click', () => {
+                setLang(currentLang === 'en' ? 'fr' : 'en');
+                updateLangFlag();
+            });
+            setLang(currentLang);
+            updateLangFlag();
+
+            // Floating controls
+            // const floatingThemeToggle = document.getElementById('floating-theme-toggle');
+            // const floatingLangToggle = document.getElementById('floating-lang-toggle');
+            // if (floatingThemeToggle) {
+            //     floatingThemeToggle.addEventListener('click', () => themeToggle.click());
+            // }
+            // if (floatingLangToggle) {
+            //     floatingLangToggle.addEventListener('click', () => langToggle.click());
+            // }
+
+            // Navbar hide on scroll
+            let lastScroll = window.scrollY;
+            let scrollUpCount = 0;
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY < lastScroll) {
+                    scrollUpCount++;
+                    if (scrollUpCount >= 2) {
+                        navbar.style.top = '0';
+                        scrollUpCount = 0;
+                    }
+                } else {
+                    navbar.style.top = '-80px';
+                    scrollUpCount = 0;
+                }
+                lastScroll = window.scrollY;
+            });
+
+            // Skill Block Bars
+            document.querySelectorAll('.skill-block-bar').forEach(bar => {
+                const percent = parseInt(bar.getAttribute('data-percent'), 10);
+                const totalBlocks = 20;
+                const filledBlocks = Math.round((percent / 100) * totalBlocks);
+                bar.innerHTML = '';
+                for (let i = 0; i < totalBlocks; i++) {
+                    const block = document.createElement('div');
+                    block.classList.add('block');
+                    if (i < filledBlocks) block.classList.add('filled');
+                    bar.appendChild(block);
+                }
+            });
+
+            // Skill Expansion and Filtering
+            const skillItems = document.querySelectorAll('.skill-item');
+            const filterButtons = document.querySelectorAll('.skills-filter button');
+
+            skillItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('close-btn')) return;
+                    if (!item.classList.contains('expanded')) {
+                        skillItems.forEach(otherItem => otherItem.classList.remove('expanded'));
+                        item.classList.add('expanded');
+                    }
+                });
+                const closeBtn = item.querySelector('.close-btn');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        item.classList.remove('expanded');
+                    });
+                }
+            });
+
+            // Close skill details on outside click
+            document.addEventListener('click', (e) => {
+                const expandedItem = document.querySelector('.skill-item.expanded');
+                if (expandedItem && !expandedItem.contains(e.target)) {
+                    expandedItem.classList.remove('expanded');
+                }
+            });
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    skillItems.forEach(item => {
+                        const category = item.getAttribute('data-category');
+                        if (filter === 'all' || category === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
