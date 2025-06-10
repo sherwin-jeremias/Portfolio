@@ -1037,7 +1037,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            emailjs.init('tRMxD3R4G6bjGun0y'); // Replace 'your-user-id' with your EmailJS User ID.
+            emailjs.init('tRMxD3R4G6bjGun0y'); // Ensure this is your correct EmailJS User ID.
 
             const contactForm = document.getElementById('contact-form');
             const formMessages = document.getElementById('form-messages');
@@ -1052,7 +1052,7 @@
                     message: formData.get('message'),
                 };
 
-                emailjs.send('sj_portfolio', 'template_6oribrw', templateParams)
+                emailjs.send('sj_portfolio', 'template_6oribrw', templateParams) // Ensure these IDs are correct.
                     .then(() => {
                         formMessages.style.display = 'block';
                         formMessages.classList.remove('error');
@@ -1060,7 +1060,8 @@
                         formMessages.textContent = 'Thank you! Your message has been sent.';
                         contactForm.reset();
                     })
-                    .catch(() => {
+                    .catch((error) => {
+                        console.error('EmailJS Error:', error); // Log the error for debugging.
                         formMessages.style.display = 'block';
                         formMessages.classList.remove('success');
                         formMessages.classList.add('error');
