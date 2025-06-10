@@ -992,7 +992,7 @@
             <div class="container">
                 <h2>Get in Touch</h2>
                 <p>Have a question or just want to connect? Feel free to reach out!</p>
-                <form id="contact-form" class="contact-form">
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/manjegjv" method="POST">
                     <div class="form-group">
                         <label for="name" id="label-name">Name:</label>
                         <input type="text" id="name" name="name" required>
@@ -1035,11 +1035,8 @@
         </button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            emailjs.init('tRMxD3R4G6bjGun0y'); // Ensure this is your correct EmailJS User ID.
-
             const contactForm = document.getElementById('contact-form');
             const formMessages = document.getElementById('form-messages');
 
@@ -1047,27 +1044,34 @@
                 e.preventDefault();
 
                 const formData = new FormData(contactForm);
-                const templateParams = {
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    message: formData.get('message'),
-                };
 
-                emailjs.send('sj_portfolio', 'template_6oribrw', templateParams)
-                    .then(() => {
+                fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
                         formMessages.style.display = 'block';
                         formMessages.classList.remove('error');
                         formMessages.classList.add('success');
                         formMessages.textContent = 'Thank you! Your message has been sent.';
                         contactForm.reset();
-                    })
-                    .catch((error) => {
-                        console.error('EmailJS Error:', error); // Log the error for debugging.
+                    } else {
                         formMessages.style.display = 'block';
                         formMessages.classList.remove('success');
                         formMessages.classList.add('error');
                         formMessages.textContent = 'An error occurred. Please try again later.';
-                    });
+                    }
+                })
+                .catch(() => {
+                    formMessages.style.display = 'block';
+                    formMessages.classList.remove('success');
+                    formMessages.classList.add('error');
+                    formMessages.textContent = 'An error occurred. Please try again later.';
+                });
             });
         });
     </script>
@@ -1230,19 +1234,27 @@
                     e.preventDefault();
 
                     const formData = new FormData(contactForm);
-                    const templateParams = {
-                        name: formData.get('name'),
-                        email: formData.get('email'),
-                        message: formData.get('message'),
-                    };
 
-                    emailjs.send('sj_portfolio', 'template_6oribrw', templateParams)
-                        .then(() => {
-                            formMessages.style.display = 'block';
-                            formMessages.classList.remove('error');
-                            formMessages.classList.add('success');
-                            formMessages.textContent = 'Thank you! Your message has been sent.';
-                            contactForm.reset();
+                    fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                formMessages.style.display = 'block';
+                                formMessages.classList.remove('error');
+                                formMessages.classList.add('success');
+                                formMessages.textContent = 'Thank you! Your message has been sent.';
+                                contactForm.reset();
+                            } else {
+                                formMessages.style.display = 'block';
+                                formMessages.classList.remove('success');
+                                formMessages.classList.add('error');
+                                formMessages.textContent = 'An error occurred. Please try again later.';
+                            }
                         })
                         .catch(() => {
                             formMessages.style.display = 'block';
@@ -1623,6 +1635,5 @@
             });
         });
     </script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </body>
 </html>
