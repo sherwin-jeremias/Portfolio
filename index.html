@@ -992,7 +992,7 @@
             <div class="container">
                 <h2>Get in Touch</h2>
                 <p>Have a question or just want to connect? Feel free to reach out!</p>
-                <form action="php/contact.php" method="POST" class="contact-form">
+                <form id="contact-form" class="contact-form">
                     <div class="form-group">
                         <label for="name" id="label-name">Name:</label>
                         <input type="text" id="name" name="name" required>
@@ -1035,6 +1035,40 @@
         </button>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            emailjs.init('tRMxD3R4G6bjGun0y'); // Replace 'your-user-id' with your EmailJS User ID.
+
+            const contactForm = document.getElementById('contact-form');
+            const formMessages = document.getElementById('form-messages');
+
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const formData = new FormData(contactForm);
+                const templateParams = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    message: formData.get('message'),
+                };
+
+                emailjs.send('sj_portfolio', 'template_6oribrw', templateParams)
+                    .then(() => {
+                        formMessages.style.display = 'block';
+                        formMessages.classList.remove('error');
+                        formMessages.classList.add('success');
+                        formMessages.textContent = 'Thank you! Your message has been sent.';
+                        contactForm.reset();
+                    })
+                    .catch(() => {
+                        formMessages.style.display = 'block';
+                        formMessages.classList.remove('success');
+                        formMessages.classList.add('error');
+                        formMessages.textContent = 'An error occurred. Please try again later.';
+                    });
+            });
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Canvas Animation
@@ -1187,48 +1221,33 @@
             }
 
             // Contact Form Submission
-            const contactForm = document.querySelector('.contact-form');
+            const contactForm = document.getElementById('contact-form');
             const formMessages = document.getElementById('form-messages');
             if (contactForm && formMessages) {
-                contactForm.addEventListener('submit', async (e) => {
+                contactForm.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    const name = contactForm.querySelector('[name="name"]').value.trim();
-                    const email = contactForm.querySelector('[name="email"]').value.trim();
-                    const message = contactForm.querySelector('[name="message"]').value.trim();
-                    if (!name || !email || !message) {
-                        formMessages.style.display = 'block';
-                        formMessages.classList.remove('success');
-                        formMessages.classList.add('error');
-                        formMessages.textContent = translations[currentLang].formRequired;
-                        setTimeout(() => { formMessages.style.display = 'none'; }, 5000);
-                        return;
-                    }
-                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                        formMessages.style.display = 'block';
-                        formMessages.classList.remove('success');
-                        formMessages.classList.add('error');
-                        formMessages.textContent = translations[currentLang].formInvalidEmail;
-                        setTimeout(() => { formMessages.style.display = 'none'; }, 5000);
-                        return;
-                    }
+
                     const formData = new FormData(contactForm);
-                    const response = await fetch(contactForm.action, {
-                        method: 'POST',
-                        body: formData
-                    });
-                    const result = await response.json();
-                    formMessages.style.display = 'block';
-                    if (result.success) {
-                        formMessages.classList.remove('error');
-                        formMessages.classList.add('success');
-                        formMessages.textContent = translations[currentLang].formSuccess;
-                        contactForm.reset();
-                    } else {
-                        formMessages.classList.remove('success');
-                        formMessages.classList.add('error');
-                        formMessages.textContent = translations[currentLang].formError;
-                    }
-                    setTimeout(() => { formMessages.style.display = 'none'; }, 5000);
+                    const templateParams = {
+                        name: formData.get('name'),
+                        email: formData.get('email'),
+                        message: formData.get('message'),
+                    };
+
+                    emailjs.send('sj_portfolio', 'template_6oribrw', templateParams)
+                        .then(() => {
+                            formMessages.style.display = 'block';
+                            formMessages.classList.remove('error');
+                            formMessages.classList.add('success');
+                            formMessages.textContent = 'Thank you! Your message has been sent.';
+                            contactForm.reset();
+                        })
+                        .catch(() => {
+                            formMessages.style.display = 'block';
+                            formMessages.classList.remove('success');
+                            formMessages.classList.add('error');
+                            formMessages.textContent = 'An error occurred. Please try again later.';
+                        });
                 });
             }
 
@@ -1524,16 +1543,6 @@
             setLang(currentLang);
             updateLangFlag();
 
-            // Floating controls
-            // const floatingThemeToggle = document.getElementById('floating-theme-toggle');
-            // const floatingLangToggle = document.getElementById('floating-lang-toggle');
-            // if (floatingThemeToggle) {
-            //     floatingThemeToggle.addEventListener('click', () => themeToggle.click());
-            // }
-            // if (floatingLangToggle) {
-            //     floatingLangToggle.addEventListener('click', () => langToggle.click());
-            // }
-
             // Navbar hide on scroll
             let lastScroll = window.scrollY;
             let scrollUpCount = 0;
@@ -1612,5 +1621,6 @@
             });
         });
     </script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </body>
 </html>
