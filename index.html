@@ -186,7 +186,7 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/hero-background.jpg') no-repeat center center/cover;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)); /*, url('img/hero-background.jpg') no-repeat center center/cover;*/
             color: var(--light-text-color);
             text-align: center;
             padding: 100px 20px;
@@ -194,7 +194,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 80vh;
+            min-height: 100vh;
         }
 
         .hero-content {
@@ -238,6 +238,11 @@
             flex-direction: column;
             align-items: center;
             gap: 40px;
+            padding-top: 2%;
+            padding-bottom: 2%;
+
+
+
         }
 
         .about-content {
@@ -575,7 +580,7 @@
             background-color: var(--footer-bg);
             color: var(--footer-text);
             text-align: center;
-            padding: 30px 20px;
+            padding: 20px 20px;
             font-size: 0.9rem;
         }
 
@@ -785,14 +790,20 @@
     </header>
 
     <main>
-        <section id="hero" class="hero">
-            <div class="hero-content">
-                <h1>Hello, I'm <span class="highlight">Sherwin</span></h1>
-                <p>A BUT 2 Info student at IUT Villetaneuse, passionate about web development and software engineering.</p>
-                <a href="#projects" class="btn primary-btn">View My Work</a>
-                <a href="#contact" class="btn secondary-btn">Get in Touch</a>
-            </div>
-        </section>
+        <section id="hero" class="hero" style="position:relative;overflow:hidden;">
+    <!-- Video background only for hero section -->
+    <video autoplay muted loop playsinline
+        style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;"
+        id="hero-bg-video">
+        <source id="hero-bg-video-source" src="img/vid4.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content" style="position:relative;z-index:1;">
+        <h1>Hello, I'm <span class="highlight">Sherwin</span></h1>
+        <p>A BUT 2 Info student at IUT Villetaneuse, passionate about web development and software engineering.</p>
+        <a href="#projects" class="btn primary-btn">View My Work</a>
+        <a href="#contact" class="btn secondary-btn">Get in Touch</a>
+    </div>
+</section>
 
         <section id="about" class="about-me">
             <div class="container">
@@ -803,9 +814,10 @@
                         <p>Welcome to my portfolio! I'm a second-year Information Technology student at IUT Villetaneuse, constantly learning and applying my knowledge to create impactful solutions.</p>
                         <p>During my studies, I've gained experience in web development, database management, programming languages like Java, Python, C, and frameworks like Spring Boot. I enjoy solving complex problems and building user-friendly interfaces.</p>
                         <p>I'm always looking for new challenges and opportunities to grow. Feel free to explore my projects below!</p>
-                        <a href="democv.pdf" target="_blank" class="btn primary-btn">Download Resume</a>
                     </div>
                 </div>
+                <a href="democv.pdf" target="_blank" class="btn primary-btn">Download Resume</a>
+
             </div>
         </section>
 
@@ -1018,7 +1030,7 @@
 
     <footer>
         <div class="container">
-            <p>© 2024 Sherwin. All rights reserved.</p>
+            <p style="margin-bottom: unset;">© 2024 Sherwin. All rights reserved.</p>
         </div>
     </footer>
 
@@ -1268,7 +1280,22 @@
             // Theme Toggle
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
+            const heroBgVideo = document.getElementById('hero-bg-video');
+            const heroBgVideoSource = document.getElementById('hero-bg-video-source');
             const savedTheme = localStorage.getItem('theme');
+            function setHeroVideoByTheme(theme) {
+                if (theme === 'light') {
+                    if (heroBgVideoSource.getAttribute('src') !== 'img/vid4.mp4') {
+                        heroBgVideoSource.setAttribute('src', 'img/vid4.mp4');
+                        heroBgVideo.load();
+                    }
+                } else {
+                    if (heroBgVideoSource.getAttribute('src') !== 'img/vid3.mp4') {
+                        heroBgVideoSource.setAttribute('src', 'img/vid3.mp4');
+                        heroBgVideo.load();
+                    }
+                }
+            }
             if (savedTheme === 'light') {
                 body.classList.add('light-theme');
                 const icon = themeToggle.querySelector('i');
@@ -1276,6 +1303,7 @@
                     icon.classList.remove('fa-moon');
                     icon.classList.add('fa-sun');
                 }
+                setHeroVideoByTheme('light');
             } else {
                 body.classList.remove('light-theme');
                 const icon = themeToggle.querySelector('i');
@@ -1283,6 +1311,7 @@
                     icon.classList.remove('fa-sun');
                     icon.classList.add('fa-moon');
                 }
+                setHeroVideoByTheme('dark');
             }
             themeToggle.addEventListener('click', () => {
                 body.classList.toggle('light-theme');
@@ -1291,10 +1320,12 @@
                     icon.classList.remove('fa-moon');
                     icon.classList.add('fa-sun');
                     localStorage.setItem('theme', 'light');
+                    setHeroVideoByTheme('light');
                 } else {
                     icon.classList.remove('fa-sun');
                     icon.classList.add('fa-moon');
                     localStorage.setItem('theme', 'dark');
+                    setHeroVideoByTheme('dark');
                 }
             });
 
@@ -1380,7 +1411,11 @@
                     formError: "An unexpected error occurred.",
                     labelName: "Name:",
                     labelEmail: "Email:",
-                    labelMessage: "Message:"
+                    labelMessage: "Message:",
+                    navAbout: "About",
+                    navSkills: "Skills",
+                    navProjects: "Projects",
+                    navContact: "Contact"
                 },
                 fr: {
                     heroTitle: "Bonjour, je suis <span class=\"highlight\">Sherwin</span>",
@@ -1461,7 +1496,11 @@
                     formError: "Une erreur inattendue s'est produite.",
                     labelName: "Nom :",
                     labelEmail: "E-mail :",
-                    labelMessage: "Message :"
+                    labelMessage: "Message :",
+                    navAbout: "À propos",
+                    navSkills: "Compétences",
+                    navProjects: "Projets",
+                    navContact: "Contact"
                 }
             };
 
@@ -1481,7 +1520,7 @@
                 aboutPs[0].textContent = translations[lang].about1;
                 aboutPs[1].textContent = translations[lang].about2;
                 aboutPs[2].textContent = translations[lang].about3;
-                document.querySelector('.about-text .primary-btn').textContent = translations[lang].downloadCV;
+                document.querySelector('#about .primary-btn').textContent = translations[lang].downloadCV;
                 document.querySelector('#skills h2').textContent = translations[lang].skills;
                 document.querySelectorAll('.skills-filter button')[0].textContent = translations[lang].filterAll;
                 document.querySelectorAll('.skills-filter button')[1].textContent = translations[lang].filterProgramming;
@@ -1539,6 +1578,13 @@
                 document.getElementById('label-name').textContent = translations[lang].labelName;
                 document.getElementById('label-email').textContent = translations[lang].labelEmail;
                 document.getElementById('label-message').textContent = translations[lang].labelMessage;
+
+                // Navbar translations
+                const navLinks = document.querySelectorAll('.nav-links li a');
+                navLinks[0].textContent = translations[lang].navAbout;
+                navLinks[1].textContent = translations[lang].navSkills;
+                navLinks[2].textContent = translations[lang].navProjects;
+                navLinks[3].textContent = translations[lang].navContact;
             }
             function updateLangFlag() {
                 const flag = document.getElementById('lang-flag');
