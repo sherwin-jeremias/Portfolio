@@ -761,6 +761,96 @@
         .header-controls .btn {
             padding: 6px 12px;
         }
+
+        /* Skill Modal Styles */
+        .skill-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(30, 34, 54, 0.85);
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+        .skill-modal.active {
+            display: flex;
+        }
+        .skill-modal-content {
+            background: var(--card-background);
+            color: var(--text-color);
+            border-radius: 14px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            max-width: 95vw;
+            width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px 24px 24px 24px;
+            position: relative;
+            animation: skillModalIn 0.25s cubic-bezier(.4,2,.6,1) both;
+        }
+        @keyframes skillModalIn {
+            from { transform: scale(0.92) translateY(40px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .skill-modal-content .close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 1.1rem;
+            line-height: 28px;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .skill-modal-content .close-btn:hover {
+            background: #d81b60;
+        }
+        .skill-modal-content h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .skill-modal-content .skill-block-bar {
+            margin: 18px 0 10px 0;
+        }
+        .skill-modal-content .skill-percent {
+            font-size: 1.15em;
+            color: var(--accent-color);
+        }
+        .skill-modal-content .skill-details {
+            opacity: 1 !important;
+            max-height: unset !important;
+            padding: 0 !important;
+            background: none !important;
+            box-shadow: none !important;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        /* Add this for justified text in modal */
+        .skill-modal-content .skill-details p {
+            text-align: justify;
+        }
+        @media (max-width: 600px) {
+            .skill-modal-content {
+                width: 95vw;
+                padding: 18px 6vw 18px 6vw;
+            }
+        }
+        /* Hide original expanded style */
+        .skill-item.expanded .skill-details {
+            display: none !important;
+        }
+        /* Prevent background scroll when modal open */
+        body.skill-modal-open {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body class="light-theme">
@@ -1055,7 +1145,12 @@
             </div>
         </section>
     </main>
-
+    <!-- Skill Modal Overlay -->
+    <div id="skill-modal" class="skill-modal">
+        <div class="skill-modal-content" id="skill-modal-content">
+            <!-- Modal content will be injected here -->
+        </div>
+    </div>
     <footer>
         <div class="container">
             <p style="margin-bottom: unset;">© 2024 Sherwin. All rights reserved.</p>
@@ -1663,35 +1758,67 @@
                 }
             });
 
-            // Skill Expansion and Filtering
+            // --- Skill Modal Logic ---
             const skillItems = document.querySelectorAll('.skill-item');
-            const filterButtons = document.querySelectorAll('.skills-filter button');
+            const skillModal = document.getElementById('skill-modal');
+            const skillModalContent = document.getElementById('skill-modal-content');
+            let lastFocusedSkill = null;
 
             skillItems.forEach(item => {
                 item.addEventListener('click', (e) => {
                     if (e.target.classList.contains('close-btn')) return;
-                    if (!item.classList.contains('expanded')) {
-                        skillItems.forEach(otherItem => otherItem.classList.remove('expanded'));
-                        item.classList.add('expanded');
-                    }
+                    // Modal popup logic
+                    // Gather info from skill-item
+                    const icon = item.querySelector('i').outerHTML;
+                    const title = item.querySelector('h3').textContent;
+                    const blockBar = item.querySelector('.skill-block-bar').outerHTML;
+                    const percent = item.querySelector('.skill-details .skill-percent').outerHTML;
+                    const details = Array.from(item.querySelectorAll('.skill-details p')).map(p => `<p>${p.textContent}</p>`).join('');
+                    // Modal HTML
+                    skillModalContent.innerHTML = `
+                        <button class="close-btn" aria-label="Close">✕</button>
+                        ${icon}
+                        <h3>${title}</h3>
+                        ${blockBar}
+                        <span class="skill-percent">${percent.replace(/<[^>]+>/g,'')}</span>
+                        <div class="skill-details">${details}</div>
+                    `;
+                    skillModal.classList.add('active');
+                    document.body.classList.add('skill-modal-open');
+                    lastFocusedSkill = item;
+                    // Focus close button for accessibility
+                    setTimeout(() => {
+                        const closeBtn = skillModalContent.querySelector('.close-btn');
+                        if (closeBtn) closeBtn.focus();
+                    }, 50);
                 });
-                const closeBtn = item.querySelector('.close-btn');
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        item.classList.remove('expanded');
-                    });
+            });
+
+            // Close modal on close button or overlay click
+            skillModal.addEventListener('click', (e) => {
+                if (e.target === skillModal || e.target.classList.contains('close-btn')) {
+                    skillModal.classList.remove('active');
+                    document.body.classList.remove('skill-modal-open');
+                    if (lastFocusedSkill) lastFocusedSkill.focus();
+                }
+            });
+            // Close modal on ESC key
+            document.addEventListener('keydown', (e) => {
+                if (skillModal.classList.contains('active') && e.key === 'Escape') {
+                    skillModal.classList.remove('active');
+                    document.body.classList.remove('skill-modal-open');
+                    if (lastFocusedSkill) lastFocusedSkill.focus();
                 }
             });
 
-            // Close skill details on outside click
-            document.addEventListener('click', (e) => {
-                const expandedItem = document.querySelector('.skill-item.expanded');
-                if (expandedItem && !expandedItem.contains(e.target)) {
-                    expandedItem.classList.remove('expanded');
-                }
-            });
+            // --- Remove old expand logic ---
+            // Remove .expanded logic for skillItems
+            // ...existing code up to skillItems.forEach(item => { ... })...
+            // (Remove or comment out the old expansion logic)
+            // ...existing code...
 
+            // --- Filtering logic remains unchanged ---
+            const filterButtons = document.querySelectorAll('.skills-filter button');
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const filter = button.getAttribute('data-filter');
