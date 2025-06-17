@@ -19,7 +19,7 @@
         }
 
         :root {
-            --primary-color: #00ffe7;
+            --primary-color: #20ead5;
             --secondary-color: #232946;
             --accent-color: #ff2e63;
             --text-color: #eaeaea;
@@ -81,7 +81,7 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
             border: none;
             cursor: pointer;
-            margin-right: 10px;
+            margin-right: 0px;
             margin-bottom: 10px;
             background-color: var(--primary-color);
             color: var(--light-text-color);
@@ -198,7 +198,7 @@
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
         }
 
         .hero h1 {
@@ -208,7 +208,7 @@
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             margin-bottom: 40px;
             opacity: 0.95;
             color: var(--text-color);
@@ -269,6 +269,7 @@
         .about-text {
             flex: 1;
             min-width: 300px;
+            max-width: 80%;
             /* padding-top: 32px; */
         }
 
@@ -438,7 +439,7 @@
             align-items: stretch;
             background-color: var(--card-background);
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             overflow: hidden;
             margin-bottom: 0;
             transition: transform 0.3s, box-shadow 0.3s;
@@ -463,6 +464,8 @@
             height: 100%;
             object-fit: cover;
             min-height: 220px;
+            padding: 3px;
+            background: var(--primary-color);
         }
 
         .project-card.landscape .project-desc {
@@ -765,12 +768,13 @@
         }
 
         .light-theme .hero h1 {
+            background-color: #dfe2efe6;
             color: var(--primary-color);
         }
 
         .light-theme .hero p {
             color: var(--text-color);
-            background: rgba(0,0,0,0.04);
+            background-color: #dfe2efe6;
         }
 
         /* Floating Controls */
@@ -933,9 +937,11 @@
         id="hero-bg-video">
         <source id="hero-bg-video-source" src="img/vid4.mp4" type="video/mp4">
     </video>
-    <div class="hero-content" style="position:relative;z-index:1;">
-        <h1>Hello, I'm <span class="highlight">Sherwin</span></h1>
-        <p>A BUT 2 Info student at IUT Villetaneuse, passionate about web development and software engineering.</p>
+    <div class="hero-content" style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;">
+<div style="background: #e7eaf6e8; margin-bottom: 5%; padding: 1.5em 4em; border-radius: 18px; display: table; margin-left:auto; margin-right:auto;">
+            <h1>Hello, I'm <br> Sherwin JEREMIAS</h1>
+            <p>A BUT 2 Info student at IUT Villetaneuse, passionate about web development and software engineering.</p>
+        </div>
         <a href="#projects" class="btn primary-btn">View My Work</a>
         <a href="#contact" class="btn secondary-btn">Get in Touch</a>
     </div>
@@ -943,10 +949,9 @@
 
         <section id="about" class="about-me">
             <div class="container">
-                <h2>About Me</h2>
+                <h2 style="margin-bottom:1.8rem;">About Me</h2>
                 <div class="about-content">
-                    <!-- <img src="img/profile.jpg" alt="Your Profile Picture" class="profile-pic"> -->
-                    <div class="about-text">
+                        <div class="about-text">
                         <p>Welcome to my portfolio! I'm a second-year Information Technology student at IUT Villetaneuse, constantly learning and applying my knowledge to create impactful solutions.</p>
                         <p>During my studies, I've gained experience in web development, database management, programming languages like Java, Python, C, and frameworks like Spring Boot. I enjoy solving complex problems and building user-friendly interfaces.</p>
                         <p>I'm always looking for new challenges and opportunities to grow. Feel free to explore my projects below!</p>
@@ -955,7 +960,7 @@
                 <!-- Languages subsection -->
                 <div style="margin: 24px 0 8px 0; text-align: center;">
                     <h3 style="margin-bottom: 25px; color: var(--primary-color);">Languages</h3>
-                    <ul style="list-style: none; padding: 0; display: flex; justify-content: center; gap: 32px; font-size: 1.1rem;">
+                    <ul style="list-style: none; padding: 0; display: flex; justify-content: center; gap: 32px; font-size: 1.2rem;">
                         <li title="English C1" style="display: flex; align-items: center; gap: 6px;">
                             English <span style="color: var(--accent-color); font-size: 0.95em;">(C1)</span>
                         </li>
@@ -974,19 +979,19 @@
                         <!-- 2022-2023 -->
                         <div style="display: flex; flex-direction: column; align-items: center;">
                             <div style="background: var(--primary-color); width: 18px; height: 35px; border-radius: 8px 8px 0 0;"></div>
-                            <div style="margin-top: 8px; font-weight: bold; font-size: 0.98em;">2022-2023</div>
+                            <div style="margin-top: 8px; font-weight: bold; font-size: 1.05em;">2022-2023</div>
                             <div style="font-size: 0.95em;">Terminale<br> Lycée Romain Rolland</div>
                         </div>
                         <!-- 2023-2024 -->
                         <div style="display: flex; flex-direction: column; align-items: center;">
                             <div style="background: var(--accent-color); width: 18px; height: 65px; border-radius: 8px 8px 0 0;"></div>
-                            <div style="margin-top: 8px; font-weight: bold; font-size: 0.98em;">2023-2024</div>
+                            <div style="margin-top: 8px; font-weight: bold; font-size: 1.05em;">2023-2024</div>
                             <div style="font-size: 0.95em;">BUT 1 Informatique<br>IUT de Villetaneuse</div>
                         </div>
                         <!-- 2024-2025 -->
                         <div style="display: flex; flex-direction: column; align-items: center;">
                             <div style="background: #576dd7; width: 18px; height: 90px; border-radius: 8px 8px 0 0;"></div>
-                            <div style="margin-top: 8px; font-weight: bold; font-size: 0.98em;">2024-2025</div>
+                            <div style="margin-top: 8px; font-weight: bold; font-size: 1.05em;">2024-2025</div>
                             <div style="font-size: 0.95em;">BUT 2 Informatique<br>IUT de Villetaneuse</div>
                         </div>
                     </div>
@@ -1211,7 +1216,7 @@
                 <div class="project-list">
                     <div class="project-card landscape">
                         <div class="project-image">
-                            <img src="img/project1.png" alt="Project 1 Thumbnail">
+                            <img src="img/python101.png" alt="Project 1 Thumbnail">
                         </div>
                         <div class="project-desc">
                             <h3>Santa Claus Delivery Route Optimization</h3>
@@ -1234,12 +1239,12 @@
                             </div>
                         </div>
                         <div class="project-image">
-                            <img src="img/project2.png" alt="Project 2 Thumbnail">
+                            <img src="img/santa.png" alt="Project 2 Thumbnail">
                         </div>
                     </div>
                     <div class="project-card landscape">
                         <div class="project-image">
-                            <img src="img/project2.png" alt="Project 3 Thumbnail">
+                            <img src="img/webapp.png" alt="Project 3 Thumbnail">
                         </div>
                         <div class="project-desc">
                             <h3>SAE Web Application</h3>
@@ -1262,12 +1267,12 @@
                             </div>
                         </div>
                         <div class="project-image">
-                            <img src="img/project2.png" alt="Project 4 Thumbnail">
+                            <img src="img/calculatorjava.jpg" alt="Project 4 Thumbnail">
                         </div>
                     </div>
                     <div class="project-card landscape">
                         <div class="project-image">
-                            <img src="img/project2.png" alt="Project 5 Thumbnail">
+                            <img src="img/imc.png" alt="Project 5 Thumbnail">
                         </div>
                         <div class="project-desc">
                             <h3>IMC App</h3>
@@ -1621,7 +1626,7 @@
             const langToggle = document.getElementById('lang-toggle');
             const translations = {
                 en: {
-                    heroTitle: "Hello, I'm <span class=\"highlight\">Sherwin</span>",
+                    heroTitle: "Hello, I'm  \<br>\ Sherwin JEREMIAS",
                     heroDesc: "A BUT 2 Info student at IUT Villetaneuse, passionate about web development and software engineering.",
                     viewWork: "View My Work",
                     getInTouch: "Get in Touch",
@@ -1738,8 +1743,8 @@
                     skillDockerApps: "Containerized web apps and databases for development and deployment.",
                 },
                 fr: {
-                    heroTitle: "Bonjour, je suis <span class=\"highlight\">Sherwin</span>",
-                    heroDesc: "Étudiant en BUT 2 Info à l'IUT de Villetaneuse, passionné par le développement web et l'ingénierie logicielle.",
+                    heroTitle: "Bonjour, je suis \ <br>\ Sherwin JEREMIAS",
+                    heroDesc: "Étudiant en BUT 2 Informatique à l'IUT de Villetaneuse, passionné par le développement web et l'ingénierie logicielle.",
                     viewWork: "Voir mes projets",
                     getInTouch: "Contactez-moi",
                     about: "À propos de moi",
