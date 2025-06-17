@@ -222,6 +222,19 @@
             color: var(--accent-color);
         }
 
+        .hero-inner-bg {
+            background: transparent !important;
+            margin-bottom: 5%;
+            padding: 1.5em 4em;
+            border-radius: 18px;
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .light-theme .hero-inner-bg {
+            background: #e7eaf6e8 !important;
+        }
+
         /* Sections General Styling */
         section {
             padding: 80px 0;
@@ -938,7 +951,7 @@
         <source id="hero-bg-video-source" src="img/vid4.mp4" type="video/mp4">
     </video>
     <div class="hero-content" style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;">
-<div style="background: #e7eaf6e8; margin-bottom: 5%; padding: 1.5em 4em; border-radius: 18px; display: table; margin-left:auto; margin-right:auto;">
+        <div class="hero-inner-bg">
             <h1>Hello, I'm <br> Sherwin JEREMIAS</h1>
             <p>A BUT 2 Info student at IUT Villetaneuse, passionate about web development and software engineering.</p>
         </div>
@@ -959,22 +972,22 @@
                 </div>
                 <!-- Languages subsection -->
                 <div style="margin: 24px 0 8px 0; text-align: center;">
-                    <h3 style="margin-bottom: 25px; color: var(--primary-color);">Languages</h3>
+                    <h3 id="languages-title" style="margin-bottom: 25px; color: var(--primary-color);">Languages</h3>
                     <ul style="list-style: none; padding: 0; display: flex; justify-content: center; gap: 32px; font-size: 1.2rem;">
-                        <li title="English C1" style="display: flex; align-items: center; gap: 6px;">
-                            English <span style="color: var(--accent-color); font-size: 0.95em;">(C1)</span>
+                        <li id="lang-en" title="English C1" style="display: flex; align-items: center; gap: 6px;">
+                            English <span id="lang-en-level" style="color: var(--accent-color); font-size: 0.95em;">(C1)</span>
                         </li>
-                        <li title="French" style="display: flex; align-items: center; gap: 6px;">
+                        <li id="lang-fr" title="French" style="display: flex; align-items: center; gap: 6px;">
                             French
                         </li>
-                        <li title="Tamil" style="display: flex; align-items: center; gap: 6px;">
+                        <li id="lang-ta" title="Tamil" style="display: flex; align-items: center; gap: 6px;">
                             Tamil
                         </li>
                     </ul>
                 </div>
                 <!-- School Timeline Graph -->
                 <div style="margin: 32px 0 16px 0; text-align: center;">
-                    <h3 style="margin-bottom: 25px; color: var(--primary-color);">Education Timeline</h3>
+                    <h3 style="margin-bottom: 25px; color: var(--primary-color);">Education </h3>
                     <div style="display: flex; justify-content: center; align-items: flex-end; gap: 75px; min-height: 120px;">
                         <!-- 2022-2023 -->
                         <div style="display: flex; flex-direction: column; align-items: center;">
@@ -1329,12 +1342,13 @@
 
     <div class="floating-controls">
         
-        <button id="floating-theme-toggle" style="display:none;background:var(--primary-color);color:#fff;border:none;border-radius:50%;width:48px;height:48px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:1.5rem;cursor:pointer;">
-            <i class="fas fa-sun"></i>
+        <button id="floating-theme-toggle" style="display:none;background:var(--primary-color);color:#fff;border:none;border-radius:50%;width:0px;height:0px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:1.5rem;cursor:pointer;">
+            <!-- <i class="fas fa-sun"></i> -->
         </button>
-        <button id="floating-lang-toggle" style="display:none;background:var(--primary-color);color:#fff;border:none;border-radius:50%;width:48px;height:48px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:1.5rem;cursor:pointer;">
-            <span id="lang-flag" role="img" aria-label="Français">🇫🇷</span>
+        <button id="floating-lang-toggle" style="display:none;background:var(--primary-color);color:#fff;border:none;border-radius:50%;width:0px;height:0px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:1.5rem;cursor:pointer;">
+            <!-- <span id="lang-flag" role="img" aria-label="Français">🇫🇷</span> -->
         </button>
+
         <button id="scroll-to-top" style="display:none;background:var(--primary-color);color:#fff;border:none;border-radius:50%;width:48px;height:48px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:1.5rem;cursor:pointer;">
             <i class="fas fa-arrow-up"></i>
         </button>
@@ -1741,6 +1755,11 @@
                     skillDockerHow: "Used in backend and web projects to containerize services and manage dependencies.",
                     skillDockerWhen: "Practiced since 2024 in academic and personal projects.",
                     skillDockerApps: "Containerized web apps and databases for development and deployment.",
+                    languagesTitle: "Languages",
+                    langEnglish: "English",
+                    langEnglishLevel: "(C1)",
+                    langFrench: "French",
+                    langTamil: "Tamil",
                 },
                 fr: {
                     heroTitle: "Bonjour, je suis \ <br>\ Sherwin JEREMIAS",
@@ -1858,6 +1877,11 @@
                     skillDockerHow: "Utilisé dans des projets backend et web pour conteneuriser des services et gérer les dépendances.",
                     skillDockerWhen: "Pratiqué depuis 2024 dans des projets académiques et personnels.",
                     skillDockerApps: "Conteneurisation d'applications web et de bases de données pour le développement et le déploiement.",
+                    languagesTitle: "Langues",
+                    langEnglish: "Anglais",
+                    langEnglishLevel: "(C1)",
+                    langFrench: "Français",
+                    langTamil: "Tamoul",
                 }
             };
 
@@ -1871,6 +1895,13 @@
             function setLang(lang) {
                 currentLang = lang;
                 localStorage.setItem('lang', lang);
+
+                document.getElementById('languages-title').textContent = translations[lang].languagesTitle;
+                document.getElementById('lang-en').childNodes[0].textContent = translations[lang].langEnglish + " ";
+                document.getElementById('lang-en-level').textContent = translations[lang].langEnglishLevel;
+                document.getElementById('lang-fr').textContent = translations[lang].langFrench;
+                document.getElementById('lang-ta').textContent = translations[lang].langTamil;
+
                 document.querySelector('.hero h1').innerHTML = translations[lang].heroTitle;
                 document.querySelector('.hero p').textContent = translations[lang].heroDesc;
                 document.querySelector('.hero .primary-btn').textContent = translations[lang].viewWork;
@@ -2063,12 +2094,6 @@
                     if (lastFocusedSkill) lastFocusedSkill.focus();
                 }
             });
-
-            // --- Remove old expand logic ---
-            // Remove .expanded logic for skillItems
-            // ...existing code up to skillItems.forEach(item => { ... })...
-            // (Remove or comment out the old expansion logic)
-            // ...existing code...
 
             // --- Filtering logic remains unchanged ---
             const filterButtons = document.querySelectorAll('.skills-filter button');
