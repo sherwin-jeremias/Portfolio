@@ -426,62 +426,107 @@
         }
 
         /* Projects Section */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
         }
 
-        .project-card {
+        .project-card.landscape {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
             background-color: var(--card-background);
-            border-radius: 8px;
+            border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            min-height: 240px;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        .project-card.landscape.reverse {
+            flex-direction: row-reverse;
         }
 
-        .project-card img {
+        .project-card.landscape .project-image {
+            flex: 1 1 45%;
+            min-width: 220px;
+            max-width: 400px;
+            display: flex;
+            align-items: stretch;
+            background: #111;
+        }
+
+        .project-card.landscape .project-image img {
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: cover;
-            border-bottom: 1px solid var(--border-color);
+            min-height: 220px;
         }
 
-        .project-card h3 {
-            margin: 15px 15px 10px;
+        .project-card.landscape .project-desc {
+            flex: 1 1 55%;
+            padding: 32px 32px 32px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: none;
+        }
+
+        .project-card.landscape .project-desc h3 {
+            margin: 0 0 16px 0;
             color: var(--primary-color);
         }
 
-        .project-card p {
-            font-size: 0.95rem;
-            padding: 0 15px 15px;
+        .project-card.landscape .project-desc p {
+            font-size: 1.05rem;
+            margin-bottom: 18px;
             color: var(--text-color);
         }
 
-        .project-links {
-            padding: 0 15px 15px;
+        .project-card.landscape .project-links {
+            margin-top: auto;
+            padding: 0;
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
-        .project-btn {
-            background-color: var(--primary-color);
-            color: var(--light-text-color);
-            padding: 8px 15px;
-            font-size: 0.9rem;
-            border: none;
+        /* Responsive for landscape project cards */
+        @media (max-width: 900px) {
+            .project-card.landscape,
+            .project-card.landscape.reverse {
+                flex-direction: column !important;
+                min-height: unset;
+            }
+            .project-card.landscape .project-image,
+            .project-card.landscape.reverse .project-image {
+                max-width: 100%;
+                min-width: 0;
+                height: 220px;
+            }
+            .project-card.landscape .project-desc,
+            .project-card.landscape.reverse .project-desc {
+                padding: 24px 16px;
+            }
+        }
+        @media (max-width: 600px) {
+            .project-list {
+                gap: 28px;
+            }
+            .project-card.landscape .project-desc,
+            .project-card.landscape.reverse .project-desc {
+                padding: 16px 6vw;
+            }
+            .project-card.landscape .project-image,
+            .project-card.landscape.reverse .project-image {
+                height: 160px;
+            }
         }
 
-        .project-btn:hover {
-            background-color: #00b3a6;
-            color: #fff;
-        }
+        /* Hide old grid style for projects */
+        .project-grid { display: none !important; }
 
         /* Contact Section */
         .contact {
@@ -1059,59 +1104,75 @@
         <section id="projects" class="projects">
             <div class="container">
                 <h2>My Projects</h2>
-                <div class="project-grid">
-                    <div class="project-card">
-                        <img src="img/project1.png" alt="Project 1 Thumbnail">
-                        <h3>Project Title One</h3>
-                        <p>A brief description of Project One, highlighting technologies used (e.g., React, Node.js, MySQL).</p>
-                        <div class="project-links">
-                            <a href="#" target="_blank" class="btn project-btn">Live Demo</a>
-                            <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                <div class="project-list">
+                    <div class="project-card landscape">
+                        <div class="project-image">
+                            <img src="img/project1.png" alt="Project 1 Thumbnail">
+                        </div>
+                        <div class="project-desc">
+                            <h3>Santa Claus Delivery Route Optimization</h3>
+                            <p>
+                                Developed a Python solution to optimize Santa Claus's gift delivery route across multiple cities. Utilized algorithms for distance calculation, route improvement (TSP), and data parsing from CSV, with map visualization using folium. Demonstrated skills in algorithmic problem-solving, data handling, and code quality through unit testing and documentation.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="project-card">
-                        <img src="img/project2.png" alt="Project 2 Thumbnail">
-                        <h3>Project Title Two</h3>
-                        <p>A brief description of Project Two, highlighting technologies used (e.g., Vue.js, PHP, PostgreSQL).</p>
-                        <div class="project-links">
-                            <a href="#" target="_blank" class="btn project-btn">Live Demo</a>
-                            <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                    <div class="project-card landscape reverse">
+                        <div class="project-desc">
+                            <h3>Santa Claus Route Optimization (TSP)</h3>
+                            <p>
+                                Tackled the Travelling Salesman Problem in Python to optimize Santa’s delivery route in France. Implemented greedy and local search (2-opt) algorithms, analyzed performance, and visualized results in Jupyter Notebooks. Enhanced skills in algorithmic problem solving, performance analysis, and Python development.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                            </div>
+                        </div>
+                        <div class="project-image">
+                            <img src="img/project2.png" alt="Project 2 Thumbnail">
                         </div>
                     </div>
-                    <div class="project-card">
-                        <img src="img/project2.png" alt="Project 2 Thumbnail">
-                        <h3>Project Title Three</h3>
-                        <p>A brief description of Project Two, highlighting technologies used (e.g., Vue.js, PHP, PostgreSQL).</p>
-                        <div class="project-links">
-                            <a href="#" target="_blank" class="btn project-btn">Live Demo</a>
-                            <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                    <div class="project-card landscape">
+                        <div class="project-image">
+                            <img src="img/project2.png" alt="Project 3 Thumbnail">
+                        </div>
+                        <div class="project-desc">
+                            <h3>SAE-S3.01 Web Application</h3>
+                            <p>
+                                Designed and developed a full-stack web application using PHP, MySQL, HTML, CSS, and JavaScript. Built a custom backend and responsive frontend, practicing web architecture, CRUD operations, and UI design. Strengthened integration of backend and frontend technologies for dynamic, data-driven solutions.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="project-card">
-                        <img src="img/project2.png" alt="Project 2 Thumbnail">
-                        <h3>Project Title Three</h3>
-                        <p>A brief description of Project Two, highlighting technologies used (e.g., Vue.js, PHP, PostgreSQL).</p>
-                        <div class="project-links">
-                            <a href="#" target="_blank" class="btn project-btn">Live Demo</a>
-                            <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                    <div class="project-card landscape reverse">
+                        <div class="project-desc">
+                            <h3>Java Calculator (SAE)</h3>
+                            <p>
+                                Created an object-oriented calculator in Java supporting both simple and nested arithmetic operations. Modeled the solution in UML, implemented modular code, and handled exceptions such as division by zero. This project highlights my skills in OOP, abstraction, and modular software design.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                            </div>
+                        </div>
+                        <div class="project-image">
+                            <img src="img/project2.png" alt="Project 4 Thumbnail">
                         </div>
                     </div>
-                    <div class="project-card">
-                        <img src="img/project2.png" alt="Project 2 Thumbnail">
-                        <h3>Project Title Three</h3>
-                        <p>A brief description of Project Two, highlighting technologies used (e.g., Vue.js, PHP, PostgreSQL).</p>
-                        <div class="project-links">
-                            <a href="#" target="_blank" class="btn project-btn">Live Demo</a>
-                            <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                    <div class="project-card landscape">
+                        <div class="project-image">
+                            <img src="img/project2.png" alt="Project 5 Thumbnail">
                         </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="img/project2.png" alt="Project 2 Thumbnail">
-                        <h3>Project Title Three</h3>
-                        <p>A brief description of Project Two, highlighting technologies used (e.g., Vue.js, PHP, PostgreSQL).</p>
-                        <div class="project-links">
-                            <a href="#" target="_blank" class="btn project-btn">Live Demo</a>
-                            <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                        <div class="project-desc">
+                            <h3>IMC Revision App</h3>
+                            <p>
+                                Developed a mobile app in Java (Android Studio) for calculating and tracking Body Mass Index (IMC). Focused on user-friendly UI, robust architecture, and comprehensive testing with JUnit and Espresso. Demonstrates expertise in Android development and delivering practical health-focused solutions.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" target="_blank" class="btn project-btn">GitHub Repo</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1521,10 +1582,16 @@
                     skillSpringBootWhen: "Studied in 2024.",
                     skillSpringBootApps: "Built RESTful APIs for web applications.",
                     projects: "My Projects",
-                    project1: "Project Title One",
-                    project1desc: "A brief description of Project One, highlighting technologies used (e.g., React, Node.js, MySQL).",
-                    project2: "Project Title Two",
-                    project2desc: "A brief description of Project Two, highlighting technologies used (e.g., Vue.js, PHP, PostgreSQL).",
+                    project1: "Santa Claus Delivery Route Optimization",
+                    project1desc: "Developed a Python solution to optimize Santa Claus's gift delivery route across multiple cities. Utilized algorithms for distance calculation, route improvement (TSP), and data parsing from CSV, with map visualization using folium. Demonstrated skills in algorithmic problem-solving, data handling, and code quality through unit testing and documentation.",
+                    project2: "Santa Claus Route Optimization (TSP)",
+                    project2desc: "Tackled the Travelling Salesman Problem in Python to optimize Santa’s delivery route in France. Implemented greedy and local search (2-opt) algorithms, analyzed performance, and visualized results in Jupyter Notebooks. Enhanced skills in algorithmic problem solving, performance analysis, and Python development.",
+                    project3: "SAE-S3.01 Web Application",
+                    project3desc: "Designed and developed a full-stack web application using PHP, MySQL, HTML, CSS, and JavaScript. Built a custom backend and responsive frontend, practicing web architecture, CRUD operations, and UI design. Strengthened integration of backend and frontend technologies for dynamic, data-driven solutions.",
+                    project4: "Java Calculator (SAE)",
+                    project4desc: "Created an object-oriented calculator in Java supporting both simple and nested arithmetic operations. Modeled the solution in UML, implemented modular code, and handled exceptions such as division by zero. This project highlights my skills in OOP, abstraction, and modular software design.",
+                    project5: "IMC Revision App",
+                    project5desc: "Developed a mobile app in Java (Android Studio) for calculating and tracking Body Mass Index (IMC). Focused on user-friendly UI, robust architecture, and comprehensive testing with JUnit and Espresso. Demonstrates expertise in Android development and delivering practical health-focused solutions.",
                     contact: "Get in Touch",
                     contactDesc: "Have a question or just want to connect? Feel free to reach out!",
                     sendMsg: "Send Message",
@@ -1606,10 +1673,16 @@
                     skillSpringBootWhen: "Étudié en 2024.",
                     skillSpringBootApps: "Construits des API RESTful pour des applications web.",
                     projects: "Mes Projets",
-                    project1: "Titre du Projet Un",
-                    project1desc: "Une brève description du Projet Un, mettant en avant les technologies utilisées (ex : React, Node.js, MySQL).",
-                    project2: "Titre du Projet Deux",
-                    project2desc: "Une brève description du Projet Deux, mettant en avant les technologies utilisées (ex : Vue.js, PHP, PostgreSQL).",
+                    project1: "Optimisation de la tournée du Père Noël",
+                    project1desc: "Développement d'une solution Python pour optimiser la tournée de distribution de cadeaux du Père Noël dans plusieurs villes. Utilisation d’algorithmes pour le calcul des distances, l’amélioration des itinéraires (TSP) et le traitement de données CSV, avec visualisation sur carte via folium. Ce projet met en avant mes compétences en algorithmique, gestion de données et qualité du code avec tests unitaires et documentation.",
+                    project2: "Optimisation de la tournée du Père Noël (TSP)",
+                    project2desc: "Résolution du problème du voyageur de commerce en Python pour optimiser la tournée du Père Noël en France. Implémentation d’algorithmes gloutons et de recherche locale (2-opt), analyse des performances et visualisation dans des notebooks Jupyter. Expérience approfondie en algorithmique, analyse de performance et développement Python.",
+                    project3: "Application Web SAE-S3.01",
+                    project3desc: "Conception et développement d'une application web full-stack avec PHP, MySQL, HTML, CSS et JavaScript. Backend personnalisé et frontend responsive, pratique de l’architecture web, des opérations CRUD et du design d’interface. Renforcement de l’intégration des technologies backend et frontend pour des solutions dynamiques et orientées données.",
+                    project4: "Calculatrice Java (SAE)",
+                    project4desc: "Création d’une calculatrice orientée objet en Java prenant en charge les opérations arithmétiques simples et imbriquées. Modélisation UML, code modulaire et gestion des exceptions comme la division par zéro. Ce projet met en avant mes compétences en POO, abstraction et conception logicielle modulaire.",
+                    project5: "Application IMC Révision",
+                    project5desc: "Développement d’une application mobile en Java (Android Studio) pour calculer et suivre l’Indice de Masse Corporelle (IMC). Accent sur l’interface utilisateur, l’architecture robuste et les tests complets avec JUnit et Espresso. Démontre mon expertise en développement Android et la création de solutions pratiques axées sur la santé.",
                     contact: "Contact",
                     contactDesc: "Une question ou envie de discuter ? N'hésitez pas à me contacter !",
                     sendMsg: "Envoyer le message",
@@ -1693,8 +1766,12 @@
                 document.querySelectorAll('.project-card p')[0].textContent = translations[lang].project1desc;
                 document.querySelectorAll('.project-card h3')[1].textContent = translations[lang].project2;
                 document.querySelectorAll('.project-card p')[1].textContent = translations[lang].project2desc;
-                document.querySelectorAll('.project-card h3')[2].textContent = translations[lang].project2;
-                document.querySelectorAll('.project-card p')[2].textContent = translations[lang].project2desc;
+                document.querySelectorAll('.project-card h3')[2].textContent = translations[lang].project3;
+                document.querySelectorAll('.project-card p')[2].textContent = translations[lang].project3desc;
+                document.querySelectorAll('.project-card h3')[3].textContent = translations[lang].project4;
+                document.querySelectorAll('.project-card p')[3].textContent = translations[lang].project4desc;
+                document.querySelectorAll('.project-card h3')[4].textContent = translations[lang].project5;
+                document.querySelectorAll('.project-card p')[4].textContent = translations[lang].project5desc;
                 document.querySelector('#contact h2').textContent = translations[lang].contact;
                 document.querySelector('#contact p').textContent = translations[lang].contactDesc;
                 document.querySelector('.contact-form button').textContent = translations[lang].sendMsg;
